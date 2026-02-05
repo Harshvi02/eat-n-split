@@ -1,11 +1,23 @@
 import "./index.css";
 
+
+  import { useState } from "react";
 function App() {
+  const [showAddFriend, setShowAddFriend] = useState(false);
   return (
     <div className="app">
       <div className="sidebar">
         <FriendsList />
-        <button className="button">Add friend</button>
+        {showAddFriend && <AddFriend />}
+
+       <button
+  className="button"
+  onClick={() => setShowAddFriend((show) => !show)}
+>
+  {showAddFriend ? "Close" : "Add friend"}
+</button>
+
+
       </div>
     </div>
   );
@@ -44,5 +56,18 @@ function Friend({ name, image, status, className }) {
       <p className={className}>{status}</p>
       <button className="button">Select</button>
     </li>
+  );
+}
+function AddFriend() {
+  return (
+    <form className="form-add-friend">
+      <label>👫 Friend name</label>
+      <input type="text" />
+
+      <label>🌄 Image URL</label>
+      <input type="text" />
+
+      <button className="button">Add</button>
+    </form>
   );
 }
